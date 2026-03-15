@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TeamCard from "../components/TeamCard.astro";
+import { company, pillars, reasons, services, team } from "../data/site";
+
+const siteTitle = `${company.name} | Gardening, Building and Maintenance`;
+const siteDescription = company.description;
+const formsubmitTarget = import.meta.env.PUBLIC_FORMSUBMIT_TARGET;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || "";
+const formAction = `https://formsubmit.co/${formsubmitTarget || "yourname@gmail.com"}`;
+const nextUrl = siteUrl ? `${siteUrl.replace(/\/$/, "")}/thanks` : undefined;
+const isFormConfigured = Boolean(formsubmitTarget);
+---
+
+<BaseLayout title={siteTitle} description={siteDescription}>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Handy Harvest home">
+        <img src="/images/logo.png" alt="Handy Harvest logo" />
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#team">Management</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="button button--ghost" href={company.phoneHref}>Call now</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero__copy">
+          <p class="hero__eyebrow">Handy Harvest</p>
+          <h1>{company.headline}</h1>
+          <p class="hero__lead">{company.intro}</p>
+
+          <div class="hero__actions">
+            <a class="button button--primary" href="#contact">Request a quote</a>
+            <a class="button button--secondary" href="#services">Explore services</a>
+          </div>
+
+          <div class="hero__tags">
+            {company.heroTags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__logo-card">
+            <img src="/images/logo.png" alt="Handy Harvest logo" />
+            <p>{company.shortTagline}</p>
+          </div>
+
+          <div class="hero__portrait-card">
+            <img src="/images/bheki.jpg" alt="Bheki Khoza standing in a blazer" />
+          </div>
+
+          <div class="hero__note-card">
+            <p class="hero__note-title">Reliable workmanship</p>
+            <p>{company.description}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--services" id="services">
+        <div class="section-heading">
+          <p class="section-heading__eyebrow">Services</p>
+          <h2>Practical support across outdoor care, built spaces and property upkeep.</h2>
+          <p class="section-heading__copy">
+            Handy Harvest works across landscaping, building and maintenance so properties stay attractive, functional and easier to manage.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          {services.map((service) => <ServiceCard {...service} />)}
+        </div>
+      </section>
+
+      <section class="section section--about" id="about">
+        <div class="about-panel">
+          <div class="about-panel__copy">
+            <p class="section-heading__eyebrow section-heading__eyebrow--light">About</p>
+            <h2>{company.legalName}</h2>
+            <p>{company.description}</p>
+          </div>
+
+          <div class="about-panel__pillars">
+            {pillars.map((pillar) => (
+              <article class="pillar-card">
+                <h3>{pillar.title}</h3>
+                <p>{pillar.copy}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="about-panel__reasons">
+            {reasons.map((reason) => <span>{reason}</span>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--team" id="team">
+        <div class="section-heading">
+          <p class="section-heading__eyebrow">Management</p>
+          <h2>A focused team behind the work.</h2>
+          <p class="section-heading__copy">
+            Handy Harvest is supported by leadership across executive management, human resources and accounting.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          {team.map((member) => <TeamCard {...member} />)}
+        </div>
+      </section>
+
+      <section class="section section--contact" id="contact">
+        <div class="section-heading">
+          <p class="section-heading__eyebrow">Contact Details</p>
+          <h2>Get in touch with Handy Harvest.</h2>
+          <p class="section-heading__copy">
+            Reach out directly by phone or email, or send a project enquiry through the form below.
+          </p>
+        </div>
+
+        <div class="contact-detail-grid">
+          <article class="contact-detail-card">
+            <p class="contact-detail-card__label">Mobile</p>
+            <a href={company.phoneHref}>{company.phoneDisplay}</a>
+          </article>
+          <article class="contact-detail-card">
+            <p class="contact-detail-card__label">Email</p>
+            <a href={`mailto:${company.email}`}>{company.email}</a>
+          </article>
+          <article class="contact-detail-card">
+            <p class="contact-detail-card__label">Address</p>
+            <p>{company.addressLines[0]}</p>
+            <p>{company.addressLines[1]}</p>
+          </article>
+        </div>
+
+        <ContactForm
+          formAction={formAction}
+          nextUrl={nextUrl}
+          siteUrl={siteUrl}
+          configured={isFormConfigured}
+        />
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>{company.name}</strong>
+        <p>{company.shortTagline}</p>
+      </div>
+      <div class="site-footer__links">
+        <a href={company.phoneHref}>{company.phoneDisplay}</a>
+        <a href={`mailto:${company.email}`}>{company.email}</a>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>

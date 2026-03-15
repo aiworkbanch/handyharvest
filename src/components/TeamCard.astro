@@ -1,0 +1,18 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  image: string;
+  alt: string;
+}
+
+const { name, role, image, alt } = Astro.props;
+---
+
+<article class="team-card">
+  <img src={image} alt={alt} loading="lazy" />
+  <div class="team-card__body">
+    <h3>{name}</h3>
+    <p>{role}</p>
+  </div>
+</article>

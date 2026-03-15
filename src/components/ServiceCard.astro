@@ -1,0 +1,25 @@
+---
+interface Props {
+  number: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: string[];
+}
+
+const { number, eyebrow, title, description, items } = Astro.props;
+---
+
+<article class="service-card">
+  <div class="service-card__top">
+    <span class="service-card__badge">{number}</span>
+    <div>
+      <p class="service-card__eyebrow">{eyebrow}</p>
+      <h3>{title}</h3>
+    </div>
+  </div>
+  <p class="service-card__description">{description}</p>
+  <ul class="service-card__list">
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+</article>

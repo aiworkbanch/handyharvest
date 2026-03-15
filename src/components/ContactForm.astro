@@ -1,0 +1,65 @@
+---
+interface Props {
+  formAction: string;
+  nextUrl?: string;
+  siteUrl?: string;
+  configured: boolean;
+}
+
+const { formAction, nextUrl, siteUrl, configured } = Astro.props;
+---
+
+<section class="contact-form-wrap" id="contact-form">
+  <div class="section-heading section-heading--compact">
+    <p class="section-heading__eyebrow">Contact Us</p>
+    <h2>Start the conversation.</h2>
+    <p class="section-heading__copy">
+      Send a message and Handy Harvest can respond about gardening, building, paving or maintenance work.
+    </p>
+  </div>
+
+  {!configured && (
+    <div class="form-alert">
+      <strong>Form setup needed.</strong>
+      Set <code>PUBLIC_FORMSUBMIT_TARGET</code> to your Gmail address before going live.
+    </div>
+  )}
+
+  <form class="contact-form" action={formAction} method="POST">
+    <input type="hidden" name="_subject" value="New Handy Harvest website enquiry" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="text" name="_honey" class="form-hidden" tabindex="-1" autocomplete="off" />
+    {siteUrl && <input type="hidden" name="_url" value={`${siteUrl.replace(/\/$/, "")}/#contact-form`} />}
+    {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
+
+    <label>
+      <span>Full name</span>
+      <input type="text" name="name" required placeholder="Your name" />
+    </label>
+    <label>
+      <span>Email address</span>
+      <input type="email" name="email" required placeholder="yourname@example.com" />
+    </label>
+    <label>
+      <span>Phone number</span>
+      <input type="tel" name="phone" placeholder="Optional" />
+    </label>
+    <label>
+      <span>Service needed</span>
+      <select name="service" required>
+        <option value="">Choose a service</option>
+        <option value="Gardening Services">Gardening Services</option>
+        <option value="Building and Paving">Building and Paving</option>
+        <option value="Maintenance Services">Maintenance Services</option>
+        <option value="General Enquiry">General Enquiry</option>
+      </select>
+    </label>
+    <label class="contact-form__message">
+      <span>Project details</span>
+      <textarea name="message" required rows="6" placeholder="Tell us what you need help with."></textarea>
+    </label>
+
+    <button class="button button--primary" type="submit">Send enquiry</button>
+  </form>
+</section>
