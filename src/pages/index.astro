@@ -1,9 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
-import ServiceCard from "../components/ServiceCard.astro";
-import TeamCard from "../components/TeamCard.astro";
-import { company, pillars, reasons, services, team } from "../data/site";
+import {
+  aboutStats,
+  company,
+  heroHighlights,
+  pillars,
+  reasons,
+  services,
+  team,
+} from "../data/site";
 
 const siteTitle = `${company.name} | Gardening, Building and Maintenance`;
 const siteDescription = company.description;
@@ -15,149 +21,249 @@ const isFormConfigured = Boolean(formsubmitTarget);
 ---
 
 <BaseLayout title={siteTitle} description={siteDescription}>
-  <div class="site-shell">
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Handy Harvest home">
-        <img src="/images/logo.png" alt="Handy Harvest logo" />
-      </a>
+  <div class="landing">
+    <header class="main-header">
+      <div class="main-header__inner">
+        <a class="main-header__brand" href="#top" aria-label="Handy Harvest home">
+          <img src="/images/logo.png" alt="Handy Harvest logo" />
+        </a>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#team">Management</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a class="button button--ghost" href={company.phoneHref}>Call now</a>
+        <nav class="main-header__nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#management">Management</a>
+          <a href="#contact">Contact</a>
+          <a href="/Handy-Harvest-Business-Profile.pdf" download="Handy-Harvest-Business-Profile.pdf">Download Profile</a>
+        </nav>
+      </div>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="hero__copy">
-          <p class="hero__eyebrow">Handy Harvest</p>
-          <h1>{company.headline}</h1>
-          <p class="hero__lead">{company.intro}</p>
+      <section class="hero-section">
+        <img class="hero-section__image" src="/images/hero.png" alt="Landscaped garden with pathways and flowering beds" />
+        <div class="hero-section__shade"></div>
+        <div class="hero-section__glow"></div>
 
-          <div class="hero__actions">
-            <a class="button button--primary" href="#contact">Request a quote</a>
-            <a class="button button--secondary" href="#services">Explore services</a>
+        <div class="hero-section__inner">
+          <div class="hero-section__content">
+            <p class="section-label section-label--light">Property Care Specialists</p>
+            <h1>{company.headline}</h1>
+            <p class="hero-section__lead">{company.intro}</p>
+
+            <div class="hero-section__actions">
+              <a class="button button--glass" href="#services">Explore Services</a>
+            </div>
           </div>
 
-          <div class="hero__tags">
-            {company.heroTags.map((tag) => <span>{tag}</span>)}
-          </div>
-        </div>
-
-        <div class="hero__visual">
-          <div class="hero__logo-card">
-            <img src="/images/logo.png" alt="Handy Harvest logo" />
-            <p>{company.shortTagline}</p>
-          </div>
-
-          <div class="hero__portrait-card">
-            <img src="/images/bheki.jpg" alt="Bheki Khoza standing in a blazer" />
-          </div>
-
-          <div class="hero__note-card">
-            <p class="hero__note-title">Reliable workmanship</p>
+          <aside class="hero-section__callout">
+            <p class="hero-section__callout-title">Reliable workmanship</p>
             <p>{company.description}</p>
-          </div>
+            <div class="hero-section__callout-meta">
+              <span>Appearance</span>
+              <span>Function</span>
+              <span>Safety</span>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section class="section section--services" id="services">
+      <section class="highlight-strip">
+        <div class="highlight-strip__rail">
+          {heroHighlights.map((item, index) => (
+            <article class="highlight-card">
+              <span class="highlight-card__index">0{index + 1}</span>
+              <h2>{item.title}</h2>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="intro-section">
+        <div class="intro-section__copy">
+          <p class="section-label">About</p>
+          <h2>Professional service for attractive, functional and well-maintained properties.</h2>
+          <p>
+            {company.legalName} provides high-quality landscaping, building and property maintenance
+            solutions. The focus is simple: improve the condition of every space through dependable
+            service and practical execution.
+          </p>
+
+          <ul class="intro-section__checks">
+            {reasons.map((reason) => <li>{reason}</li>)}
+          </ul>
+
+          <div class="intro-section__stats">
+            {aboutStats.map((stat) => (
+              <article>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <article class="intro-section__profile-card">
+          <img src="/images/founder.jpg" alt="Bheki Khoza, Founder" />
+          <div class="intro-section__profile-body">
+            <p class="section-label">Leadership</p>
+            <h3>Bheki Khoza</h3>
+            <span>Founder</span>
+            <p>
+              A focused leadership presence behind Handy Harvest’s gardening, building and property
+              maintenance delivery.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="about-band" id="about">
+        <div class="about-band__heading">
+          <p class="section-label section-label--light">Why Handy Harvest</p>
+          <h2>One team for outdoor care, property upkeep and maintenance.</h2>
+          <p>
+            Handy Harvest helps clients maintain spaces that look better, work better and feel
+            better managed, whether the need is garden care, construction support or routine
+            property maintenance.
+          </p>
+        </div>
+
+        <div class="about-band__pillars">
+          {pillars.map((pillar) => (
+            <article class="pillar-box">
+              <h3>{pillar.title}</h3>
+              <p>{pillar.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="services-section" id="services">
         <div class="section-heading">
-          <p class="section-heading__eyebrow">Services</p>
-          <h2>Practical support across outdoor care, built spaces and property upkeep.</h2>
-          <p class="section-heading__copy">
-            Handy Harvest works across landscaping, building and maintenance so properties stay attractive, functional and easier to manage.
+          <p class="section-label">Services</p>
+          <h2>Garden, paving &amp;<br />property&nbsp;care&nbsp;support.</h2>
+          <p>
+            The business offers structured support across outdoor maintenance, building work and
+            preventative property upkeep.
           </p>
         </div>
 
         <div class="service-grid">
-          {services.map((service) => <ServiceCard {...service} />)}
+          {services.map((service) => (
+            <article class="service-panel">
+              <div class="service-panel__header">
+                <span class="service-panel__badge">{service.number}</span>
+                <h3>{service.title}</h3>
+              </div>
+
+              <img class="service-panel__image" src={service.image} alt={service.alt} />
+
+              <div class="service-panel__body">
+                <p class="service-panel__description">{service.description}</p>
+                <ul class="service-panel__list">
+                  {service.items.map((item) => <li>{item}</li>)}
+                </ul>
+                <a class="service-panel__action" href="#contact">
+                  <span>Learn More</span>
+                  <span class="service-panel__action-icon" aria-hidden="true">&gt;</span>
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section class="section section--about" id="about">
-        <div class="about-panel">
-          <div class="about-panel__copy">
-            <p class="section-heading__eyebrow section-heading__eyebrow--light">About</p>
-            <h2>{company.legalName}</h2>
-            <p>{company.description}</p>
-          </div>
-
-          <div class="about-panel__pillars">
-            {pillars.map((pillar) => (
-              <article class="pillar-card">
-                <h3>{pillar.title}</h3>
-                <p>{pillar.copy}</p>
-              </article>
-            ))}
-          </div>
-
-          <div class="about-panel__reasons">
-            {reasons.map((reason) => <span>{reason}</span>)}
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--team" id="team">
+      <section class="management-section" id="management">
         <div class="section-heading">
-          <p class="section-heading__eyebrow">Management</p>
+          <p class="section-label">Management</p>
           <h2>A focused team behind the work.</h2>
-          <p class="section-heading__copy">
-            Handy Harvest is supported by leadership across executive management, human resources and accounting.
+          <p>
+            Handy Harvest is supported by leadership across executive management, human resources
+            and accounting.
           </p>
         </div>
 
         <div class="team-grid">
-          {team.map((member) => <TeamCard {...member} />)}
+          {team.map((member) => (
+            <article class="team-panel">
+              <img src={member.image} alt={member.alt} />
+              <div class="team-panel__body">
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section class="section section--contact" id="contact">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Contact Details</p>
-          <h2>Get in touch with Handy Harvest.</h2>
-          <p class="section-heading__copy">
-            Reach out directly by phone or email, or send a project enquiry through the form below.
-          </p>
-        </div>
+      <section class="contact-section" id="contact">
+        <div class="contact-section__shell">
+          <div class="contact-section__info">
+            <div class="section-heading section-heading--contact">
+              <p class="section-label section-label--light">Contact Us</p>
+              <h2>Start the conversation.</h2>
+              <p>
+                Send a message and Handy Harvest can respond about gardening, building, paving or
+                maintenance work.
+              </p>
+            </div>
 
-        <div class="contact-detail-grid">
-          <article class="contact-detail-card">
-            <p class="contact-detail-card__label">Mobile</p>
-            <a href={company.phoneHref}>{company.phoneDisplay}</a>
-          </article>
-          <article class="contact-detail-card">
-            <p class="contact-detail-card__label">Email</p>
-            <a href={`mailto:${company.email}`}>{company.email}</a>
-          </article>
-          <article class="contact-detail-card">
-            <p class="contact-detail-card__label">Address</p>
-            <p>{company.addressLines[0]}</p>
-            <p>{company.addressLines[1]}</p>
-          </article>
-        </div>
+            <div class="contact-details">
+              <article class="contact-details__card">
+                <p class="section-label section-label--light">Mobile</p>
+                <a href={company.phoneHref}>{company.phoneDisplay}</a>
+              </article>
+              <article class="contact-details__card">
+                <p class="section-label section-label--light">Email</p>
+                <a href={`mailto:${company.email}`}>{company.email}</a>
+              </article>
+              <article class="contact-details__card">
+                <p class="section-label section-label--light">Address</p>
+                <p>{company.addressLines[0]}</p>
+                <p>{company.addressLines[1]}</p>
+              </article>
+            </div>
+          </div>
 
-        <ContactForm
-          formAction={formAction}
-          nextUrl={nextUrl}
-          siteUrl={siteUrl}
-          configured={isFormConfigured}
-        />
+          <ContactForm
+            formAction={formAction}
+            nextUrl={nextUrl}
+            siteUrl={siteUrl}
+            configured={isFormConfigured}
+          />
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div>
-        <strong>{company.name}</strong>
-        <p>{company.shortTagline}</p>
-      </div>
-      <div class="site-footer__links">
-        <a href={company.phoneHref}>{company.phoneDisplay}</a>
-        <a href={`mailto:${company.email}`}>{company.email}</a>
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <img src="/images/logo.png" alt="Handy Harvest logo" />
+          <p>{company.shortTagline}</p>
+        </div>
+
+        <div class="site-footer__column">
+          <h3>Quick Links</h3>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#management">Management</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="site-footer__column">
+          <h3>Services</h3>
+          <span>Gardening Services</span>
+          <span>Building & Paving</span>
+          <span>Maintenance Services</span>
+        </div>
+
+        <div class="site-footer__column">
+          <h3>Contact</h3>
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+          <a href={company.phoneHref}>{company.phoneDisplay}</a>
+          <span>{company.addressLines[0]}</span>
+          <span>{company.addressLines[1]}</span>
+        </div>
       </div>
     </footer>
   </div>

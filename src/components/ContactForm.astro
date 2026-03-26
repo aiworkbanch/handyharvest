@@ -9,15 +9,7 @@ interface Props {
 const { formAction, nextUrl, siteUrl, configured } = Astro.props;
 ---
 
-<section class="contact-form-wrap" id="contact-form">
-  <div class="section-heading section-heading--compact">
-    <p class="section-heading__eyebrow">Contact Us</p>
-    <h2>Start the conversation.</h2>
-    <p class="section-heading__copy">
-      Send a message and Handy Harvest can respond about gardening, building, paving or maintenance work.
-    </p>
-  </div>
-
+<div class="contact-form-wrap" id="contact-form">
   {!configured && (
     <div class="form-alert">
       <strong>Form setup needed.</strong>
@@ -62,4 +54,4 @@ const { formAction, nextUrl, siteUrl, configured } = Astro.props;
 
     <button class="button button--primary" type="submit">Send enquiry</button>
   </form>
-</section>
+</div>

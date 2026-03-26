@@ -1,6 +1,9 @@
 node_modules
 dist
 .astro
+.pdfthumb/
+.qlpdf/
+.qlpreview/
 .DS_Store
 .env
 .wrangler
@@ -17,3 +20,15 @@ verify-*.png
 /Tym.jpg
 /logo.png
 /info.md
+/hero.png
+reference-*.png
+redesign-*.png
+/Handy Harvest Business Profile2.html
+/Handy Harvest Business Profile2_files/
+/Handy-Harvest-Business-Profile-image-safe.pdf
+/Handy-Harvest-Business-Profile-vector.pdf
+/card1.jpg
+/card2.jpg
+/card3.jpeg
+/founder.jpg
+/public/Handy-Harvest-Business-Profile-image-safe.pdf
