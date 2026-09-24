@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactForm from "../components/ContactForm.astro";
 import {
   aboutStats,
   company,
@@ -203,7 +202,7 @@ const isFormConfigured = Boolean(formsubmitTarget);
               <p class="section-label section-label--light">Contact Us</p>
               <h2>Start the conversation.</h2>
               <p>
-                Send a message and Handy Harvest can respond about gardening, building, paving or
+                Reach Handy Harvest directly about gardening, building, paving or
                 maintenance work.
               </p>
             </div>
@@ -224,13 +223,6 @@ const isFormConfigured = Boolean(formsubmitTarget);
               </article>
             </div>
           </div>
-
-          <ContactForm
-            formAction={formAction}
-            nextUrl={nextUrl}
-            siteUrl={siteUrl}
-            configured={isFormConfigured}
-          />
         </div>
       </section>
     </main>
